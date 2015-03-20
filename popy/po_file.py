@@ -9,9 +9,13 @@ class PoFile(object):
 		self.messages = messages if messages else []
 
 	def get_messages(self):
-		lines = self._get_file_content()
-		self.messages = self._parse_blocks(lines)
+		if not self.messages:
+			self.messages = self.read_messages()
 		return self.messages
+
+	def read_messages(self):
+		lines = self._get_file_content()
+		return self._parse_blocks(lines)
 
 	def write_messages(self):
 		content = ""
@@ -19,10 +23,21 @@ class PoFile(object):
 			content += message.__str__() + '\n'
 		self._write_file(content)
 
+	def fix_newline_matching(self):
+		self.get_messages()
+		for message in self.messages:
+			message.fix_newline_matching()
+
 	def _parse_blocks(self, lines):
 		message_blocks = []
 		block = []
+		found_header = False
 		for line in lines:
+			if not found_header:
+				if line.startswith('msgid ""'):
+					found_header = True
+				else:
+					continue
 			if not len(line.strip()):
 				message_blocks.append(MessageEntry.from_lines(block))
 				block = []

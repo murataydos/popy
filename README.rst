@@ -2,6 +2,13 @@
 popy
 ===========
 
+.. image:: https://pypip.in/d/popy/badge.png
+  :target: https://pypi.python.org/pypi/popy/
+.. image:: https://pypip.in/license/popy/badge.png
+  :target: https://pypi.python.org/pypi/popy/
+.. image:: https://coveralls.io/repos/murataydos/popy/badge.svg 
+  :target: https://coveralls.io/r/murataydos/popy
+  
 Parser for GNU Po files
 
 Installation
@@ -41,6 +48,7 @@ These are the attributes::
     extracted_comments: list of strings  
     references: list of strings  
     flags: list of strings  
+    is_fuzzy: boolean
   
 These are the important methods::
 

@@ -1,0 +1,64 @@
+# Some comments
+# to make sure that it's not 
+# breaking anything
+
+msgid ""
+msgstr ""
+"Project-Id-Version: base\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-29 16:22+0100\n"
+"PO-Revision-Date: 2015-03-05 01:12+0100\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. Translators: a warning message
+#: library/test.py:43
+msgid ""
+"There are many strings in a po file\n"
+"some contain only one line\n"
+"and some contain many..."
+msgstr ""
+"Translate this to Spanish\n"
+"with many lines.\n"
+
+#. translators: attention
+#: library/test.py:55
+msgid "One line message id"
+msgstr "One line translation"
+
+# test.py:195
+# test.py:168
+#. translators: warning
+#. translators: warning 2
+#. translators: warning 3
+#: test.py:466
+#: test.py:478
+#: test.py:488
+msgid "Message with many comments"
+msgstr "Translate based on comments"
+
+#. translators: newlines are important
+#: library/test.py:622
+msgid ""
+"\n"
+"    Newlines are important:"
+msgstr ""
+"\n"
+"    AFAIK:"
+
+#~ msgid "A fuzzy message."
+#~ msgstr "No need to translate this one."
+
+msgid "A message."
+msgid_plural "A plural message"
+msgstr[0] ""
+"Singular message "
+"has translation"
+msgstr[1] ""
+"Plural message doesn't "
+"have one"

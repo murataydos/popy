@@ -8,6 +8,6 @@ install:
   - pip install nose
   - pip install coveralls
 script: 
-	nosetests --with-coverage --cover-package=popy
+  nosetests --with-coverage --cover-package=popy
 after_success:
   coveralls

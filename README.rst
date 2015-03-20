@@ -6,6 +6,8 @@ popy
   :target: https://pypi.python.org/pypi/popy/
 .. image:: https://pypip.in/license/popy/badge.png
   :target: https://pypi.python.org/pypi/popy/
+.. image:: https://travis-ci.org/murataydos/popy.svg
+  :target: https://travis-ci.org/murataydos/popy/
 .. image:: https://coveralls.io/repos/murataydos/popy/badge.svg 
   :target: https://coveralls.io/r/murataydos/popy
   

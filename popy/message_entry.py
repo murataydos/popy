@@ -7,9 +7,11 @@ class MessageEntry(object):
     EXTRACTED_COMMENT_PREFIX = '#. '
     REFERENCE_PREFIX = '#: '
     FLAG_PREFIX = '#, '
+    FUZZY_PREFIX = '#~ '
 
     def __init__(self, msgid, msgstr, msgid_plural=None, msgctxt=None,
-                 translator_comments=None, extracted_comments=None, references=None, flags=None):
+                 translator_comments=None, extracted_comments=None, references=None, 
+                 flags=None, is_fuzzy=False):
         self.msgid = msgid
         self.msgstr = msgstr if isinstance(msgstr, list) else [msgstr]
         self.msgid_plural = msgid_plural
@@ -18,6 +20,7 @@ class MessageEntry(object):
         self.extracted_comments = extracted_comments
         self.references = references
         self.flags = flags
+        self.is_fuzzy = is_fuzzy
 
     @property
     def translator_comments_text(self):
@@ -41,7 +44,9 @@ class MessageEntry(object):
 
     @property
     def msgstr_text(self):
-        if len(self.msgstr) == 1:
+        if not self.msgstr:
+            return 'msgstr ""\n'
+        elif len(self.msgstr) == 1:
             if len(self.msgid):
                 return 'msgstr "{}"\n'.format(self.msgstr[0])
             return 'msgstr ""\n' + '{}\n'.format('\n'.join(['"{}\\n"'.format(header) \
@@ -91,8 +96,20 @@ class MessageEntry(object):
 
     def __str__(self):
         return self.translator_comments_text + self.extracted_comments_text + \
-            self.references_text + self.flags_text + self.msgid_text + \
+            self.references_text + self.flags_text + self.msgctxt_text + self.msgid_text + \
             self.msgid_plural_text + self.msgstr_text
+
+    @classmethod
+    def remove_fuzzy_prefix(cls, fuzzy_lines):
+        lines = []
+        is_fuzzy = False
+        for line in fuzzy_lines:
+            if line.startswith(cls.FUZZY_PREFIX):
+                is_fuzzy = True
+                lines.append(line[len(cls.FUZZY_PREFIX):])
+            else:
+                lines.append(line)
+        return lines, is_fuzzy
 
     @classmethod
     def from_lines(cls, lines):
@@ -108,11 +125,12 @@ class MessageEntry(object):
         flags = []
         previous_line_type = None
         last_msgstr_index = -1
+        lines, is_fuzzy = cls.remove_fuzzy_prefix(lines)
         for line in lines:
             line = line.strip()
             if line.startswith('#'):
                 if line.startswith(cls.TRANSLATOR_COMMENT_PREFIX):
-                    translator_comments.append(line[3:])
+                    translator_comments.append(line[2:])
                 elif line.startswith(cls.EXTRACTED_COMMENT_PREFIX):
                     extracted_comments.append(line[3:])
                 elif line.startswith(cls.REFERENCE_PREFIX):
@@ -148,4 +166,4 @@ class MessageEntry(object):
                     raise InvalidMessageEntry()
 
         return cls(msgid, msgstr, msgid_plural, msgctxt, translator_comments,
-                   extracted_comments, references, flags)
+                   extracted_comments, references, flags, is_fuzzy)

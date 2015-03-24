@@ -45,8 +45,10 @@ class MessageEntry(object):
     @property
     def msgstr_text(self):
         if not self.msgstr:
+            if self.msgid_plural:
+                return 'msgstr[0] ""\n'
             return 'msgstr ""\n'
-        elif len(self.msgstr) == 1:
+        elif len(self.msgstr) == 1 and not self.msgid_plural:
             if len(self.msgid):
                 return 'msgstr "{}"\n'.format(self.msgstr[0])
             return 'msgstr ""\n' + '{}\n'.format('\n'.join(['"{}\\n"'.format(header) \
@@ -67,7 +69,7 @@ class MessageEntry(object):
         return 'msgctxt "{}"\n'.format(self.msgctxt) if self.msgctxt else ''
 
     def fix_newline_matching(self):
-        if not len(self.msgid) or not len(self.msgstr):
+        if not len(self.msgid) or not len(self.msgstr) or not len(self.msgstr[0]):
             return
         num_beginning_newlines, num_ending_newlines, _ = self.count_newlines_and_strip(self.msgid)
         self.msgstr[0] = self.add_newlines(self.msgstr[0], num_beginning_newlines, num_ending_newlines)
@@ -78,7 +80,6 @@ class MessageEntry(object):
                 self.msgstr[index + 1] = self.add_newlines(msg, num_beginning_newlines, num_ending_newlines)
 
     def count_newlines_and_strip(self, msg):
-        msg = msg.strip()
         num_beginning_newlines = 0
         num_ending_newlines = 0
         while msg.startswith('\\n'):
@@ -87,7 +88,7 @@ class MessageEntry(object):
         while msg.endswith('\\n'):
             num_ending_newlines += 1
             msg = msg[:-2]
-        return num_beginning_newlines, num_ending_newlines, msg.strip()
+        return num_beginning_newlines, num_ending_newlines, msg
 
     def add_newlines(self, msg, num_beginning_newlines, num_ending_newlines):
         _, _, msg = self.count_newlines_and_strip(msg)

@@ -6,7 +6,7 @@ setup(
     name='popy',
     description='Parser for GNU Po files',
     long_description=open('README.rst').read(),
-    version='0.1.1',
+    version='0.1.2',
     packages=['popy'],
     author='Murat Aydos',
     author_email='murataydos@yandex.com',

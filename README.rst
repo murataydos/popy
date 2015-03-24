@@ -59,5 +59,25 @@ These are the important methods::
     
     __str__()
     # Generates a message block
-  
+    
+    
+PoFile object
+-------------------
+These are the attributes::
 
+    path: str
+    messages: list of MessageEntry objects  
+  
+These are the important methods::
+
+    get_messages()
+    # Reads messages and returns list of MessageEntry objects
+
+    write_messages()
+    # Writes MessageEntry objects into the file
+
+    fix_newline_matching() 
+    # Applys fix_newline_matching to the whole file
+    
+    __str__()
+    # Generates a message block

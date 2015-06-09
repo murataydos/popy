@@ -1,3 +1,5 @@
+import codecs
+
 from .po_exceptions import InvalidFilePath
 from .message_entry import MessageEntry
 
@@ -48,7 +50,7 @@ class PoFile(object):
 	def _get_file_content(self):
 		if not self.path:
 			raise InvalidFilePath()
-		f = open(self.path, 'r+')
+		f = codecs.open(self.path, 'r+', encoding='utf-8')
 		lines = f.readlines()
 		f.close()
 		return lines
@@ -56,6 +58,6 @@ class PoFile(object):
 	def _write_file(self, content):
 		if not self.path:
 			raise InvalidFilePath()
-		f = open(self.path, 'w+')
+		f = codecs.open(self.path, 'w+', encoding='utf-8')
 		f.write(content)
 		f.close()

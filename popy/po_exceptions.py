@@ -7,7 +7,7 @@ class InvalidMessageEntry(Exception):
     pass
 
 class InvalidFilePath(Exception):
-	"""
-	Raised when parser can't find the po file
-	"""
-	pass
+    """
+    Raised when parser can't find the po file
+    """
+    pass

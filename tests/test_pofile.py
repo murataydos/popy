@@ -16,7 +16,7 @@ class TestPoFile(unittest.TestCase):
 
     def test_get_messages(self):
         messages = self.po_file.get_messages()
-        self.assertEqual(len(messages), 6)
+        self.assertEqual(len(messages), 7)
         self.assertEqual(messages[1].msgid,
                          'There are many strings in a po file\\nsome contain only one line\\n' + \
                          'and some contain many...')

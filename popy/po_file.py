@@ -45,6 +45,8 @@ class PoFile(object):
                 block = []
             else:
                 block.append(line)
+        if block:
+            message_blocks.append(MessageEntry.from_lines(block))
         return message_blocks
 
     def _get_file_content(self):

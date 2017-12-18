@@ -156,6 +156,7 @@ class TestMessageEntry(unittest.TestCase):
         self.assertEqual(message.references, ['test.py:139'])
         self.assertEqual(message.msgid, 'Sample text')
         self.assertEqual(message.msgstr, ['Ornek yazi'])
+        self.assertEqual(message.msgctxt, None)
 
         lines = [
             '# Translator comment',
@@ -177,6 +178,7 @@ class TestMessageEntry(unittest.TestCase):
         self.assertEqual(message.extracted_comments, ['Extracted comment'])
         self.assertEqual(message.msgid, 'Sample message id with multiple lines')
         self.assertEqual(message.msgstr, ['Sample message string with multiple lines'])
+        self.assertEqual(message.msgctxt, 'Message context')
 
     def test_from_lines_plural(self):
         lines = [

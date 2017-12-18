@@ -5,12 +5,12 @@ setup(
     name='popy',
     description='Parser for GNU Po files',
     long_description=open('README.rst').read(),
-    version='0.2.0',
+    version='0.3.0',
     packages=['popy'],
     author='Murat Aydos',
     author_email='murataydos@yandex.com',
     url='https://github.com/murataydos/popy',
-    license='GPL',
+    license='MIT',
     zip_safe=False,
     include_package_data=True
 )

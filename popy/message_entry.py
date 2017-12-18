@@ -151,7 +151,7 @@ class MessageEntry(object):
                     msgstr.append(line[line.index('"') + 1:-1] if len(line[line.index('"'):]) > 1 else '')
                 elif line.startswith('msgctxt'):
                     previous_line_type = 'msgctxt'
-                    msgid = line[9:-1] if len(line[9:]) > 1 else ''
+                    msgctxt = line[9:-1] if len(line[9:]) > 1 else ''
                 elif line.startswith('"'):
                     if previous_line_type == 'msgid':
                         msgid += line[1:-1] if len(line) > 2 else ''
